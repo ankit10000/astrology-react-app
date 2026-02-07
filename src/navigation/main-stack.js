@@ -6,15 +6,14 @@ import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 
-import i18n from '../i18n';
 import { useGlobals } from '../contexts/global';
 import { useIsDark } from '../hooks/use-theme';
+import i18n from '../i18n';
 import ChatScreen from '../screens/main/chat.screen';
 import CompatibilityScreen from '../screens/main/compatibility.screen';
 import DailyScreen from '../screens/main/daily.screen';
 import ProfileScreen from '../screens/main/profile.screen';
 import ZodiacScreen from '../screens/main/zodiac.screen';
-import LearnStackNavigation from './learn-stack';
 
 const BarIcon = ({ color, size, name }) => {
   return (
@@ -88,20 +87,6 @@ function BottomBarNavigation() {
               <BarLabel {...props}>{i18n.t('Compatibility2')}</BarLabel>
             ),
             title: i18n.t('Compatibility2'),
-          }}
-        />
-        <Tab.Screen
-          name="Learn"
-          component={LearnStackNavigation}
-          options={{
-            headerShown: false,
-            tabBarIcon: (props) => (
-              <BarIcon {...props} name="book-open-page-variant" />
-            ),
-            tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t('Learn')}</BarLabel>
-            ),
-            title: i18n.t('Learn'),
           }}
         />
         <Tab.Screen
