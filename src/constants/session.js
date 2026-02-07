@@ -3,6 +3,9 @@ import { Language } from '../utils';
 export const SESSION_KEY = 'session-key';
 
 const default_session = {
+  authToken: null,
+  email: null,
+  userId: null,
   name: null,
   sign: null,
   birthDate: null,

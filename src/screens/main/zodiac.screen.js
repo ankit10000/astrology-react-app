@@ -45,7 +45,10 @@ function ZodiacScreen({ navigation }) {
 
   return (
     <BlurView
-      style={[StyleSheet.absoluteFill]}
+      style={[
+        StyleSheet.absoluteFill,
+        { backgroundColor: isDark ? 'rgba(15, 15, 15, 0.92)' : 'rgba(255, 255, 255, 0.93)' },
+      ]}
       tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}
     >

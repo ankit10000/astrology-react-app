@@ -16,11 +16,10 @@ import MainNav from '../../components/navs/main-nav';
 import ShadowHeadline from '../../components/paper/shadow-headline';
 import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
-import { daily } from '../../constants/daily';
 import months from '../../constants/months';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
-import { Language } from '../../utils';
+import api from '../../services/api';
 import Storer from '../../utils/storer';
 
 /**
@@ -85,12 +84,9 @@ const ProgressItemStyles = StyleSheet.create({
 function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
-  const dataIndex = daily.findIndex(
-    (item) =>
-      item.day.split('-')[2].toString() === new Date().getDate().toString() &&
-      item.sign === session.sign
-  );
-  const data = daily[dataIndex !== -1 ? dataIndex : 0];
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
   const d = new Date();
 
   React.useLayoutEffect(() => {
@@ -98,6 +94,30 @@ function DailyScreen({ navigation }) {
       Storer.delete(SESSION_KEY).then(() => dispatch({ type: 'setLogOut' }));
     }
   }, [dispatch, session?.sign]);
+
+  React.useEffect(() => {
+    if (!session?.sign) return;
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api.horoscope
+      .getDaily(session.sign, session.language)
+      .then((result) => {
+        if (!cancelled) {
+          setData(result);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [session?.sign, session?.language]);
 
   const Header = (
     <View>
@@ -134,6 +154,29 @@ function DailyScreen({ navigation }) {
     </View>
   );
 
+  if (loading) {
+    return (
+      <>
+        <SpaceSky />
+        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ProgressBar indeterminate style={{ width: 200, borderRadius: 5 }} />
+          <Text style={{ marginTop: 15 }}>{i18n.t('Loading')}...</Text>
+        </SafeAreaView>
+      </>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <>
+        <SpaceSky />
+        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>{i18n.t('Something is wrong')}</Text>
+        </SafeAreaView>
+      </>
+    );
+  }
+
   return (
     <>
       <SpaceSky />
@@ -157,7 +200,7 @@ function DailyScreen({ navigation }) {
               <TextBold
                 style={{ fontSize: 16, marginLeft: 5, color: colors.primary }}
               >
-                {i18n.t(data.contents.focus)}
+                {i18n.t(data.focus)}
               </TextBold>
             </View>
             <View
@@ -173,16 +216,16 @@ function DailyScreen({ navigation }) {
             >
               <ProgressItem
                 text={i18n.t('Love')}
-                percent={data.contents.percents.love}
+                percent={data.percents.love}
               />
               <ProgressItem
                 text={i18n.t('Career')}
-                percent={data.contents.percents.work}
+                percent={data.percents.work}
                 style={{ marginHorizontal: 5 }}
               />
               <ProgressItem
                 text={i18n.t('Health')}
-                percent={data.contents.percents.health}
+                percent={data.percents.health}
               />
             </View>
             <View style={[styles.defaultContainer]}>
@@ -212,7 +255,7 @@ function DailyScreen({ navigation }) {
                 </View>
               </View>
               <Text style={{ marginTop: 15 }}>
-                {data.contents.text[Language.filteredLocale()]}
+                {data.text}
               </Text>
             </View>
             <View style={styles.defaultContainer}>
@@ -243,7 +286,7 @@ function DailyScreen({ navigation }) {
                 />
               </View>
               <View style={[styles.loveSignsContainer]}>
-                {data.contents.compatibility.map((sign, i) => (
+                {data.compatibility.map((sign, i) => (
                   <Sign
                     key={i}
                     sign={sign}
@@ -269,7 +312,7 @@ function DailyScreen({ navigation }) {
                 },
               ]}
             >
-              {data.contents.numbers.map((number, i) => (
+              {data.numbers.map((number, i) => (
                 <LuckyNumber key={i} number={number} />
               ))}
             </View>

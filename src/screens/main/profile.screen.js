@@ -57,7 +57,10 @@ function ProfileScreen({ navigation }) {
 
   return (
     <BlurView
-      style={[StyleSheet.absoluteFill]}
+      style={[
+        StyleSheet.absoluteFill,
+        { backgroundColor: isDark ? 'rgba(15, 15, 15, 0.92)' : 'rgba(255, 255, 255, 0.93)' },
+      ]}
       tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}
     >
@@ -113,17 +116,15 @@ function ProfileScreen({ navigation }) {
         >
           {i18n.t('Rate the app')}
         </Button>
-        {__DEV__ && (
-          <Button
-            onPress={_handleLogOut}
-            icon="restart"
-            style={{ marginTop: 10 }}
-            labelStyle={styles.buttonsLabel}
-            contentStyle={{ justifyContent: 'flex-start' }}
-          >
-            {i18n.t('Restart')}
-          </Button>
-        )}
+        <Button
+          onPress={_handleLogOut}
+          icon="logout"
+          style={{ marginTop: 10 }}
+          labelStyle={styles.buttonsLabel}
+          contentStyle={{ justifyContent: 'flex-start' }}
+        >
+          {i18n.t('Log out')}
+        </Button>
       </View>
       <Divider style={{ marginTop: 10 }} />
       <View style={styles.optionsContainer}>

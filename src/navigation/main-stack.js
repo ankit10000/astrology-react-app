@@ -9,8 +9,7 @@ import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 import i18n from '../i18n';
 import { useGlobals } from '../contexts/global';
 import { useIsDark } from '../hooks/use-theme';
-import AstrologersScreen from '../screens/main/astrologers.screen';
-import AstrologerQuestionScreen from '../screens/main/astrologuers-question.screen';
+import ChatScreen from '../screens/main/chat.screen';
 import CompatibilityScreen from '../screens/main/compatibility.screen';
 import DailyScreen from '../screens/main/daily.screen';
 import ProfileScreen from '../screens/main/profile.screen';
@@ -106,17 +105,17 @@ function BottomBarNavigation() {
           }}
         />
         <Tab.Screen
-          name="Astrologists"
-          component={AstrologersScreen}
+          name="Chat"
+          component={ChatScreen}
           options={{
             headerShown: false,
             tabBarIcon: (props) => (
-              <BarIcon {...props} name="theme-light-dark" />
+              <BarIcon {...props} name="chat-processing" />
             ),
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t('Astrologers')}</BarLabel>
+              <BarLabel {...props}>{i18n.t('Ask AI')}</BarLabel>
             ),
-            title: i18n.t('Astrologers'),
+            title: i18n.t('Ask AI'),
           }}
         />
       </Tab.Navigator>
@@ -157,19 +156,6 @@ function MainStackNavigation() {
             contentStyle: {
               backgroundColor: 'transparent',
               marginTop: 50,
-              borderTopLeftRadius: 30,
-              borderTopRightRadius: 30,
-            },
-          }}
-        />
-        <Sta.Screen
-          name="Question"
-          component={AstrologerQuestionScreen}
-          options={{
-            presentation: 'transparentModal',
-            contentStyle: {
-              backgroundColor: 'transparent',
-              marginTop: 100,
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
             },

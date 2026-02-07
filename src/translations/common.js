@@ -87,6 +87,21 @@ const common = {
     'Wait ~24 hours for the response': 'Espere ~24 horas para la respuesta',
     'Watch an ad to unblock': 'Ver un ad para desbloquear',
     'Something is wrong': 'Alguna cosa no está funcionando correctamente 🙄',
+    'Sign In': 'Iniciar sesión',
+    'Sign Up': 'Registrarse',
+    'Welcome Back': 'Bienvenido de nuevo',
+    'Create Account': 'Crear cuenta',
+    'Sign in to continue your cosmic journey':
+      'Inicia sesión para continuar tu viaje cósmico',
+    'Begin your astrological adventure':
+      'Comienza tu aventura astrológica',
+    "Don't have an account?": '¿No tienes cuenta?',
+    'Already have an account?': '¿Ya tienes una cuenta?',
+    Name: 'Nombre',
+    'Ask AI': 'Pregunta a la IA',
+    'Ask about your horoscope...': 'Pregunta sobre tu horóscopo...',
+    chat_welcome:
+      '¡Hola {{name}}! Soy tu asistente personal de astrología. Como {{sign}}, puedo ayudarte a entender tu horóscopo diario, compatibilidad y más. ¿Qué te gustaría saber?',
   },
   en: {
     Ok: 'Ok',
@@ -171,6 +186,20 @@ const common = {
     'Wait ~24 hours for the response': 'Wait ~24 hours for the response',
     'Watch an ad to unblock': 'Watch an ad to unlock',
     'Something is wrong': 'Something is wrong 🙄',
+    'Sign In': 'Sign In',
+    'Sign Up': 'Sign Up',
+    'Welcome Back': 'Welcome Back',
+    'Create Account': 'Create Account',
+    'Sign in to continue your cosmic journey':
+      'Sign in to continue your cosmic journey',
+    'Begin your astrological adventure': 'Begin your astrological adventure',
+    "Don't have an account?": "Don't have an account?",
+    'Already have an account?': 'Already have an account?',
+    Name: 'Name',
+    'Ask AI': 'Ask AI',
+    'Ask about your horoscope...': 'Ask about your horoscope...',
+    chat_welcome:
+      'Hello {{name}}! I am your personal astrology assistant. As a {{sign}}, I can help you understand your daily horoscope, compatibility, and more. What would you like to know?',
   },
 };
 

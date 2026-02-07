@@ -15,9 +15,9 @@ import MainNav from '../../components/navs/main-nav';
 import ShadowHeadline from '../../components/paper/shadow-headline';
 import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
-import { stale } from '../../constants/stale';
 import HoroscopeSigns from '../../constants/zodiac-signs';
-import { Language } from '../../utils';
+import { useGlobals } from '../../contexts/global';
+import api from '../../services/api';
 
 /**
  * Progress bars from match
@@ -49,21 +49,48 @@ const Bars = ({ name, icon, end }) => {
  * @constructor
  */
 const MatchContent = ({ sign1, sign2 }) => {
-  const dataIndex = stale.findIndex(
-    (item) => item.sign1 === sign1 && item.sign2 === sign2
-  );
-  const data = stale[dataIndex !== -1 ? dataIndex : 0];
+  const [{ session }] = useGlobals();
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    api.horoscope
+      .getCompatibility(sign1, sign2, session.language)
+      .then((result) => {
+        if (!cancelled) {
+          setData(result);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [sign1, sign2, session.language]);
+
   const matches_data = [
-    {
-      name: 'Intimate',
-      icon: 'account-multiple-plus-outline',
-    },
+    { name: 'Intimate', icon: 'account-multiple-plus-outline' },
     { name: 'Mindset', icon: 'thought-bubble' },
     { name: 'Feelings', icon: 'heart' },
     { name: 'Priorities', icon: 'priority-high' },
     { name: 'Interests', icon: 'sticker-emoji' },
     { name: 'Sport', icon: 'run' },
   ];
+
+  if (loading) {
+    return (
+      <View style={{ padding: 40, alignItems: 'center' }}>
+        <ProgressBar indeterminate style={{ width: 200, borderRadius: 5 }} />
+        <Text style={{ marginTop: 10 }}>{i18n.t('Loading')}...</Text>
+      </View>
+    );
+  }
+
+  if (!data) return null;
 
   return (
     <>
@@ -72,11 +99,11 @@ const MatchContent = ({ sign1, sign2 }) => {
           <TextBold style={{ marginBottom: 10 }}>
             {i18n.t(sign1)} & {i18n.t(sign2)}
           </TextBold>
-          <Text variant="bodyMedium">{data.resume[Language.filteredLocale()]}</Text>
+          <Text variant="bodyMedium">{data.resume}</Text>
           <TextBold style={{ marginTop: 20, marginBottom: 10 }}>
             {i18n.t('Relationship')}
           </TextBold>
-          <Text variant="bodyMedium">{data.relationship[Language.filteredLocale()]}</Text>
+          <Text variant="bodyMedium">{data.relationship}</Text>
           <View style={{ marginVertical: 20 }}>
             {matches_data.map((props, index) => (
               <Bars

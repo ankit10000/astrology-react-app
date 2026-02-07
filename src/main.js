@@ -7,6 +7,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { SESSION_KEY } from './constants/session';
 import themes from './constants/themes';
 import { useGlobals } from './contexts/global';
+import AuthStackNavigation from './navigation/auth-stack';
 import InitialStackNavigation from './navigation/initial-stack';
 import MainStackNavigation from './navigation/main-stack';
 import { DateUtils } from './utils';
@@ -71,7 +72,9 @@ function Main() {
   return (
     <PaperProvider theme={_theme}>
       <NavigationContainer theme={_theme}>
-        {session.basicsDone ? (
+        {!session.authToken ? (
+          <AuthStackNavigation />
+        ) : session.basicsDone ? (
           <MainStackNavigation />
         ) : (
           <InitialStackNavigation />

@@ -7,6 +7,7 @@ const i18n = new I18n(Translations);
 
 const languageTag = Localization.getLocales()[0]?.languageTag ?? 'en';
 i18n.locale = languageTag;
+i18n.defaultLocale = 'en';
 i18n.enableFallback = true;
 
 export default i18n;

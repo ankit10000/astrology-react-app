@@ -16,8 +16,8 @@ import Aquarius from '../../svgs/Aquarius';
  * @constructor
  */
 function NameScreen({ navigation }) {
-  const dispatch = useGlobals()[1];
-  const [name, setName] = React.useState();
+  const [{ session }, dispatch] = useGlobals();
+  const [name, setName] = React.useState(session.name || '');
   const { colors } = useTheme();
   const buttonDisabled = !name || name.length < 2;
   const _handleContinue = () => {

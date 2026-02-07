@@ -8,6 +8,7 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
+import api from '../../services/api';
 import SolarSystem from '../../svgs/SolarSystem';
 import Storer from '../../utils/storer';
 
@@ -39,6 +40,16 @@ function LoadingScreen({ navigation }) {
           ...{ days: 1, daysRow: 1, basicsDone: true },
         };
         Storer.set(SESSION_KEY, preSession).then(() => {
+          // Sync onboarding data to backend (non-blocking)
+          api.user
+            .saveOnboarding({
+              sign: session.sign,
+              birthDate: session.birthDate,
+              sex: session.sex,
+              relationship: session.relationship,
+              number: session.number,
+            })
+            .catch((e) => console.warn('Failed to sync onboarding:', e));
           dispatch({
             type: 'setSession',
             fields: preSession,
