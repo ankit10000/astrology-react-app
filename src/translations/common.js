@@ -99,7 +99,7 @@ const common = {
     'Already have an account?': '¿Ya tienes una cuenta?',
     Name: 'Nombre',
     'Ask AI': 'Pregunta a la IA',
-    'Ask about your horoscope...': 'Pregunta sobre tu horóscopo...',
+    chat_placeholder: 'Pregunta sobre tu horóscopo...',
     chat_welcome:
       '¡Hola {{name}}! Soy tu asistente personal de astrología. Como {{sign}}, puedo ayudarte a entender tu horóscopo diario, compatibilidad y más. ¿Qué te gustaría saber?',
   },
@@ -197,7 +197,7 @@ const common = {
     'Already have an account?': 'Already have an account?',
     Name: 'Name',
     'Ask AI': 'Ask AI',
-    'Ask about your horoscope...': 'Ask about your horoscope...',
+    chat_placeholder: 'Ask about your horoscope...',
     chat_welcome:
       'Hello {{name}}! I am your personal astrology assistant. As a {{sign}}, I can help you understand your daily horoscope, compatibility, and more. What would you like to know?',
   },

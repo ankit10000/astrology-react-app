@@ -6,7 +6,7 @@ import Translations from './translations';
 const i18n = new I18n(Translations);
 
 const languageTag = Localization.getLocales()[0]?.languageTag ?? 'en';
-i18n.locale = languageTag;
+i18n.locale = languageTag.split('-')[0];
 i18n.defaultLocale = 'en';
 i18n.enableFallback = true;
 

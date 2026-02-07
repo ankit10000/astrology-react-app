@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import React from 'react';
 import {
   FlatList,
@@ -15,10 +14,11 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import MainNav from '../../components/navs/main-nav';
 import SpaceSky from '../../components/decorations/space-sky';
+import MainNav from '../../components/navs/main-nav';
 import ShadowHeadline from '../../components/paper/shadow-headline';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 
 function ChatScreen({ navigation }) {
@@ -149,7 +149,7 @@ function ChatScreen({ navigation }) {
         >
           <TextInput
             mode="outlined"
-            placeholder={i18n.t("Ask about your horoscope...")}
+            placeholder={i18n.t('chat_placeholder')}
             value={inputText}
             onChangeText={setInputText}
             style={styles.input}
