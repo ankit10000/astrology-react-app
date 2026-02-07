@@ -1,0 +1,23 @@
+node_modules/**/*
+.expo
+.expo-shared/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+# macOS
+.DS_Store
+
+# credentials
+src/credentials/admob.js
+src/credentials/google-services.json
+
+# ides
+.idea
+

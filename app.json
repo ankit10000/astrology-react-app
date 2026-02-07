@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Astrale",
+    "slug": "astrale",
+    "version": "1.0.0",
+    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, well-being and good fortune for today with Astrale app.",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "primaryColor": "#151515",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#151515"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "scheme": "astrale",
+    "ios": {
+      "bundleIdentifier": "x.astrale",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false,
+      "icon": "./assets/images/icon.png"
+    },
+    "android": {
+      "package": "x.astrale",
+      "versionCode": 4
+    },
+    "androidStatusBar": {
+      "hidden": false,
+      "translucent": true,
+      "barStyle": "light-content",
+      "backgroundColor": "#151515"
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      "expo-asset",
+      "expo-localization"
+    ]
+  }
+}
