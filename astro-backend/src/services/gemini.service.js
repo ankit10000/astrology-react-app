@@ -7,7 +7,8 @@ Never provide medical, legal, or financial advice.
 Keep responses concise (under 200 words for chat, under 300 words for daily horoscopes).`;
 
 async function generateChatResponse(userMessage, userContext, lang = 'en') {
-  const langInstruction = lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
 
   const prompt = `${SYSTEM_CONTEXT}
 
@@ -29,7 +30,8 @@ Respond in a personalized way based on their astrological profile:`;
 }
 
 async function generateDailyHoroscope(sign, userContext, lang = 'en') {
-  const langInstruction = lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
   const today = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -60,7 +62,8 @@ Return ONLY valid JSON, no markdown formatting.`;
 }
 
 async function generateCompatibility(sign1, sign2, lang = 'en') {
-  const langInstruction = lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
 
   const prompt = `${SYSTEM_CONTEXT}
 
@@ -88,4 +91,8 @@ Return ONLY valid JSON, no markdown formatting.`;
   return JSON.parse(text.replace(/```json\n?|\n?```/g, '').trim());
 }
 
-module.exports = { generateChatResponse, generateDailyHoroscope, generateCompatibility };
+module.exports = {
+  generateChatResponse,
+  generateDailyHoroscope,
+  generateCompatibility,
+};

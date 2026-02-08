@@ -1,12 +1,18 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, Text, TextInput, useTheme } from 'react-native-paper';
+import {
+  Button,
+  HelperText,
+  Text,
+  TextInput,
+  useTheme,
+} from 'react-native-paper';
 
 import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 import { Backgrounds } from '../../svgs';
 import Leo from '../../svgs/zodiac/Leo';

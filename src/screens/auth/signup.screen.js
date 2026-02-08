@@ -1,12 +1,18 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, Text, TextInput, useTheme } from 'react-native-paper';
+import {
+  Button,
+  HelperText,
+  Text,
+  TextInput,
+  useTheme,
+} from 'react-native-paper';
 
 import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 import { Backgrounds } from '../../svgs';
 import Pisces from '../../svgs/zodiac/Pisces';
@@ -120,11 +126,7 @@ function SignupScreen({ navigation }) {
         <Text style={{ color: colors.text }}>
           {i18n.t('Already have an account?')}{' '}
         </Text>
-        <Button
-          mode="text"
-          compact
-          onPress={() => navigation.goBack()}
-        >
+        <Button mode="text" compact onPress={() => navigation.goBack()}>
           {i18n.t('Sign In')}
         </Button>
       </View>

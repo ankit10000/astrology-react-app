@@ -6,7 +6,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   ActivityIndicator,
   IconButton,
@@ -14,6 +13,7 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SpaceSky from '../../components/decorations/space-sky';
 import MainNav from '../../components/navs/main-nav';
@@ -113,62 +113,68 @@ function ChatScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <>
       <SpaceSky />
-      <MainNav />
-      <ShadowHeadline style={styles.headline}>
-        {i18n.t('Ask AI')}
-      </ShadowHeadline>
-      <FlatList
-        ref={flatListRef}
-        data={messages}
-        renderItem={renderMessage}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.messagesList}
-        onContentSizeChange={() =>
-          flatListRef.current?.scrollToEnd({ animated: true })
-        }
-        style={styles.flatList}
-      />
-      {isLoading && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="small" />
-          <Text style={{ marginLeft: 8, opacity: 0.6 }}>
-            {i18n.t('Loading')}...
-          </Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <MainNav />
+          <ShadowHeadline style={styles.headline}>
+            {i18n.t('Ask AI')}
+          </ShadowHeadline>
         </View>
-      )}
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={90}
-      >
-        <View
-          style={[
-            styles.inputContainer,
-            { borderTopColor: colors.outlineVariant },
-          ]}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
         >
-          <TextInput
-            mode="outlined"
-            placeholder={i18n.t('chat_placeholder')}
-            value={inputText}
-            onChangeText={setInputText}
-            style={styles.input}
-            multiline
-            maxLength={500}
-            onSubmitEditing={handleSend}
-            dense
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            renderItem={renderMessage}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.messagesList}
+            onContentSizeChange={() =>
+              flatListRef.current?.scrollToEnd({ animated: true })
+            }
+            style={styles.flatList}
+            keyboardShouldPersistTaps="handled"
           />
-          <IconButton
-            icon="send"
-            mode="contained"
-            onPress={handleSend}
-            disabled={!inputText.trim() || isLoading}
-            style={styles.sendButton}
-          />
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          {isLoading && (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="small" />
+              <Text style={{ marginLeft: 8, opacity: 0.6 }}>
+                {i18n.t('Loading')}...
+              </Text>
+            </View>
+          )}
+          <View
+            style={[
+              styles.inputContainer,
+              { borderTopColor: colors.outlineVariant },
+            ]}
+          >
+            <TextInput
+              mode="outlined"
+              placeholder={i18n.t('chat_placeholder')}
+              value={inputText}
+              onChangeText={setInputText}
+              style={styles.input}
+              multiline
+              maxLength={500}
+              onSubmitEditing={handleSend}
+              dense
+            />
+            <IconButton
+              icon="send"
+              mode="contained"
+              onPress={handleSend}
+              disabled={!inputText.trim() || isLoading}
+              style={styles.sendButton}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </>
   );
 }
 
@@ -176,9 +182,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    paddingTop: 50,
+    paddingBottom: 8,
+  },
   headline: {
     textAlign: 'center',
-    marginBottom: 8,
+  },
+  keyboardView: {
+    flex: 1,
   },
   flatList: {
     flex: 1,

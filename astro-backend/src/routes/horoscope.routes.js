@@ -1,8 +1,12 @@
 const express = require('express');
+
 const auth = require('../middleware/auth');
-const { generateDailyHoroscope, generateCompatibility } = require('../services/gemini.service');
 const HoroscopeCache = require('../models/HoroscopeCache');
 const User = require('../models/User');
+const {
+  generateDailyHoroscope,
+  generateCompatibility,
+} = require('../services/gemini.service');
 
 const router = express.Router();
 
@@ -59,7 +63,9 @@ router.get('/compatibility', auth, async (req, res, next) => {
     const { sign1, sign2, lang = 'en' } = req.query;
 
     if (!sign1 || !sign2) {
-      return res.status(400).json({ error: 'Both sign1 and sign2 are required' });
+      return res
+        .status(400)
+        .json({ error: 'Both sign1 and sign2 are required' });
     }
 
     // Check cache (sort signs for consistent key)

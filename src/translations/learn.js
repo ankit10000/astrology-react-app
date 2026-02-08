@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * i18n Custom translation
  * For horoscope strings related to the horoscope

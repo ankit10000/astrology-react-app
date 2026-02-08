@@ -2,10 +2,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-import {
-  MD3DarkTheme,
-  MD3LightTheme,
-} from 'react-native-paper';
+import { MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
 
 // MD3 and Navigation v7 themes use rgb()/rgba() color strings.
 // The app concatenates hex opacity suffixes (e.g. colors.text + '3D'),

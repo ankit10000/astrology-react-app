@@ -1,9 +1,9 @@
 require('dotenv').config();
-const express = require('express');
 const cors = require('cors');
+const express = require('express');
+
 const connectDB = require('./src/config/db');
 const errorHandler = require('./src/middleware/errorHandler');
-
 const authRoutes = require('./src/routes/auth.routes');
 const chatRoutes = require('./src/routes/chat.routes');
 const horoscopeRoutes = require('./src/routes/horoscope.routes');

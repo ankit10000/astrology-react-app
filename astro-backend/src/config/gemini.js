@@ -20,11 +20,14 @@ const generateWithRetry = async (prompt, maxRetries = 2) => {
         const result = await model.generateContent(prompt);
         return result.response.text();
       } catch (err) {
-        const is429 = err.message?.includes('429') || err.message?.includes('quota');
+        const is429 =
+          err.message?.includes('429') || err.message?.includes('quota');
         if (is429 && attempt < maxRetries) {
           // Wait before retrying same model
           const delay = (attempt + 1) * 5000;
-          console.log(`Rate limited on ${modelName}, retrying in ${delay / 1000}s...`);
+          console.log(
+            `Rate limited on ${modelName}, retrying in ${delay / 1000}s...`
+          );
           await sleep(delay);
           continue;
         }

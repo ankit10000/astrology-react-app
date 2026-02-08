@@ -1,6 +1,5 @@
 import { BlurView } from 'expo-blur';
 import * as Localization from 'expo-localization';
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -12,6 +11,7 @@ import { SESSION_KEY } from '../../constants/session';
 import HoroscopeSigns, { HoroscopeDates } from '../../constants/zodiac-signs';
 import { useGlobals } from '../../contexts/global';
 import { useIsDark } from '../../hooks/use-theme';
+import i18n from '../../i18n';
 import { Backgrounds } from '../../svgs';
 import PlatformUtils from '../../utils/platform';
 import Sleep from '../../utils/sleep';
@@ -47,7 +47,11 @@ function ZodiacScreen({ navigation }) {
     <BlurView
       style={[
         StyleSheet.absoluteFill,
-        { backgroundColor: isDark ? 'rgba(15, 15, 15, 0.92)' : 'rgba(255, 255, 255, 0.93)' },
+        {
+          backgroundColor: isDark
+            ? 'rgba(15, 15, 15, 0.92)'
+            : 'rgba(255, 255, 255, 0.93)',
+        },
       ]}
       tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}

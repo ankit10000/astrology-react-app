@@ -93,8 +93,7 @@ const common = {
     'Create Account': 'Crear cuenta',
     'Sign in to continue your cosmic journey':
       'Inicia sesión para continuar tu viaje cósmico',
-    'Begin your astrological adventure':
-      'Comienza tu aventura astrológica',
+    'Begin your astrological adventure': 'Comienza tu aventura astrológica',
     "Don't have an account?": '¿No tienes cuenta?',
     'Already have an account?': '¿Ya tienes una cuenta?',
     Name: 'Nombre',

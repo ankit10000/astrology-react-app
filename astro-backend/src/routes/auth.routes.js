@@ -1,6 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+
 const User = require('../models/User');
 
 const router = express.Router();
@@ -13,9 +14,14 @@ const generateToken = (userId) => {
 router.post(
   '/signup',
   [
-    body('name').trim().isLength({ min: 2, max: 20 }).withMessage('Name must be 2-20 characters'),
+    body('name')
+      .trim()
+      .isLength({ min: 2, max: 20 })
+      .withMessage('Name must be 2-20 characters'),
     body('email').isEmail().normalizeEmail().withMessage('Invalid email'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+    body('password')
+      .isLength({ min: 6 })
+      .withMessage('Password must be at least 6 characters'),
   ],
   async (req, res, next) => {
     try {

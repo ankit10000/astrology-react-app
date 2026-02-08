@@ -37,7 +37,7 @@ const useShare = (message, url) => {
         } else if (result.action === Share.dismissedAction) {
           // dismissed
         }
-      } catch (error) {
+      } catch (_error) {
         // todo
       }
       return true;
@@ -46,7 +46,7 @@ const useShare = (message, url) => {
     if (startShare) {
       sharing().then(() => setStartShare(false));
     }
-  }, [startShare]);
+  }, [startShare, message, url]);
 
   return { setStartShare };
 };

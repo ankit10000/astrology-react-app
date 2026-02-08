@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useTheme } from 'react-native-paper';
 import Svg, { Circle, Ellipse, G, Path } from 'react-native-svg';
 
 function InLove({ color = 'white', height = 120, width = 120, style }) {
-  const { colors } = useTheme();
   return (
     <Svg height={height} width={width} viewBox="0 0 512 512" style={style}>
       <Circle cx={256} cy={265.905} r={246.096} fill="#ffd93b" />

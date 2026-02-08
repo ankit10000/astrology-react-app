@@ -1,14 +1,8 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Divider, ProgressBar, Text, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Divider,
-  ProgressBar,
-  Text,
-  useTheme,
-} from 'react-native-paper';
 
 import ShowFromTop from '../../components/animations/show-from-top';
 import ScrollViewFadeFirst from '../../components/containers/scroll-view-fade-first';
@@ -20,6 +14,7 @@ import { Sign } from '../../components/zodiac';
 import months from '../../constants/months';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 import Storer from '../../utils/storer';
 
@@ -159,7 +154,9 @@ function DailyScreen({ navigation }) {
     return (
       <>
         <SpaceSky />
-        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <SafeAreaView
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
           <ProgressBar indeterminate style={{ width: 200, borderRadius: 5 }} />
           <Text style={{ marginTop: 15 }}>{i18n.t('Loading')}...</Text>
         </SafeAreaView>
@@ -171,7 +168,9 @@ function DailyScreen({ navigation }) {
     return (
       <>
         <SpaceSky />
-        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <SafeAreaView
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
           <Text>{i18n.t('Something is wrong')}</Text>
         </SafeAreaView>
       </>
@@ -255,9 +254,7 @@ function DailyScreen({ navigation }) {
                   />
                 </View>
               </View>
-              <Text style={{ marginTop: 15 }}>
-                {data.text}
-              </Text>
+              <Text style={{ marginTop: 15 }}>{data.text}</Text>
             </View>
             <View style={styles.defaultContainer}>
               <TextBold style={styles.textTitles}>

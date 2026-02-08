@@ -12,7 +12,11 @@ import { useTheme } from 'react-native-paper';
  * @returns {*}
  * @constructor
  */
-function MainNav({ children, style, rightButton = <View style={{ width: 1 }} /> }) {
+function MainNav({
+  children,
+  style,
+  rightButton = <View style={{ width: 1 }} />,
+}) {
   const navigation = useNavigation();
   const { colors } = useTheme();
   return (

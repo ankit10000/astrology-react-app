@@ -33,7 +33,8 @@ const request = async (method, path, body = null) => {
 
 const api = {
   auth: {
-    login: (email, password) => request('POST', '/auth/login', { email, password }),
+    login: (email, password) =>
+      request('POST', '/auth/login', { email, password }),
     signup: (name, email, password) =>
       request('POST', '/auth/signup', { name, email, password }),
   },

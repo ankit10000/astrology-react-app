@@ -1,5 +1,4 @@
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
@@ -8,6 +7,7 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import Sign from '../../components/zodiac/sign';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import { Backgrounds } from '../../svgs';
 import Scorpio from '../../svgs/Scorpio';
 import { DateUtils, Platform } from '../../utils';

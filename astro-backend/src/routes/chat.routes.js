@@ -1,7 +1,8 @@
 const express = require('express');
+
 const auth = require('../middleware/auth');
-const { generateChatResponse } = require('../services/gemini.service');
 const User = require('../models/User');
+const { generateChatResponse } = require('../services/gemini.service');
 
 const router = express.Router();
 
@@ -30,7 +31,11 @@ router.post('/', auth, async (req, res, next) => {
       }
     }
 
-    const response = await generateChatResponse(message, userContext, lang || 'en');
+    const response = await generateChatResponse(
+      message,
+      userContext,
+      lang || 'en'
+    );
 
     res.json({ response });
   } catch (err) {

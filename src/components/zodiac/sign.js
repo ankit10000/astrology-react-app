@@ -1,12 +1,9 @@
-import i18n from '../../i18n';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-  Text,
-  TouchableRipple
-} from 'react-native-paper';
+import { Text, TouchableRipple } from 'react-native-paper';
 
+import i18n from '../../i18n';
 import { Zodiac } from '../../svgs';
 import PlatformUtils from '../../utils/platform';
 
@@ -78,9 +75,15 @@ function Sign({
           <ParsedSign width={signHeight} height={signWidth} />
         </View>
         {showTitle && (
-          <Text variant="titleMedium" style={styleTitle}>{title ?? i18n.t(sign)}</Text>
+          <Text variant="titleMedium" style={styleTitle}>
+            {title ?? i18n.t(sign)}
+          </Text>
         )}
-        {subtitle && <Text variant="bodySmall" style={styleSubtitle}>{subtitle}</Text>}
+        {subtitle && (
+          <Text variant="bodySmall" style={styleSubtitle}>
+            {subtitle}
+          </Text>
+        )}
       </>
     </TouchableRipple>
   );

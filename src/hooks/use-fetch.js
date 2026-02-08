@@ -97,6 +97,7 @@ const useFetch = ({ method, params, url }, values = {}) => {
     return () => {
       isSubscribed = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   return { data, loading, error, setLoading: () => setLoading() };

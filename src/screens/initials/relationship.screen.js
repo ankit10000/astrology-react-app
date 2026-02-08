@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, TouchableRipple } from 'react-native-paper';
@@ -6,6 +5,7 @@ import { Button, Text, TouchableRipple } from 'react-native-paper';
 import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import Cool from '../../svgs/Cool';
 import InLove from '../../svgs/InLove';
 import ItsDifficult from '../../svgs/ItsDifficult';

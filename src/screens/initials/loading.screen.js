@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -8,6 +7,7 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 import SolarSystem from '../../svgs/SolarSystem';
 import Storer from '../../utils/storer';
@@ -70,7 +70,10 @@ function LoadingScreen({ navigation }) {
         </Rotation>
       </View>
       <View style={{ flex: 3 }}>
-        <Text variant="titleMedium" style={[styles.textSubheading, { color: colors.primary }]}>
+        <Text
+          variant="titleMedium"
+          style={[styles.textSubheading, { color: colors.primary }]}
+        >
           {phrases[phrase]}
         </Text>
       </View>

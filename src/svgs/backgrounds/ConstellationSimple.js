@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import Svg, { Circle, Path } from 'react-native-svg';
 
-function ConstellationSimple({ color = '#fbf1e2', dotColor = '#f4d8a5', height = 120, width = 120, style }) {
+function ConstellationSimple({
+  color = '#fbf1e2',
+  dotColor = '#f4d8a5',
+  height = 120,
+  width = 120,
+  style,
+}) {
   return (
     <Svg height={height} width={width} viewBox="0 0 512 512" style={style}>
       <Path

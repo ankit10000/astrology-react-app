@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * i18n Custom translation
  * For special strings that are only used in one APP

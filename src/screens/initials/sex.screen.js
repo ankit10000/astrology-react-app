@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, TouchableRipple } from 'react-native-paper';
@@ -6,6 +5,7 @@ import { Button, Text, TouchableRipple } from 'react-native-paper';
 import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import Female from '../../svgs/Female';
 import Leo from '../../svgs/Leo';
 import Male from '../../svgs/Male';
@@ -33,7 +33,9 @@ function SexScreen({ navigation }) {
       <Leo width={60} height={60} style={styles.leo} />
       <View style={{ flex: 1 }} />
       <View style={styles.textContainer}>
-        <Text variant="headlineMedium" style={styles.textHeadline}>{i18n.t('Your gender')}</Text>
+        <Text variant="headlineMedium" style={styles.textHeadline}>
+          {i18n.t('Your gender')}
+        </Text>
         <Text style={styles.textText}>
           {i18n.t(
             '{name}, to give you accurate and personal information we need to know some info',

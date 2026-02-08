@@ -1,7 +1,5 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Button,
   Divider,
@@ -9,6 +7,7 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ShowFromTop from '../../components/animations/show-from-top';
 import SpaceSky from '../../components/decorations/space-sky';
@@ -18,6 +17,7 @@ import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
 import HoroscopeSigns from '../../constants/zodiac-signs';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import api from '../../services/api';
 
 /**
@@ -162,6 +162,7 @@ function CompatibilityScreen({ navigation }) {
       setCompDetailsShow(true);
       scRef.scrollTo({ y: 0 });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSigns]);
 
   return (

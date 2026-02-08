@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
@@ -7,6 +6,7 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import CustomInput from '../../components/paper/custom-input';
 import { useGlobals } from '../../contexts/global';
+import i18n from '../../i18n';
 import Aquarius from '../../svgs/Aquarius';
 import Dices from '../../svgs/Dices';
 

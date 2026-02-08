@@ -1,11 +1,11 @@
 import { Platform } from 'react-native';
 
-interface PlatformUtils {
+interface IPlatformUtils {
   isIos: boolean;
   isAndroid: boolean;
 }
 
-const PlatformUtils: PlatformUtils = {
+const PlatformUtils: IPlatformUtils = {
   isIos: Platform.OS === 'ios',
   isAndroid: Platform.OS === 'android',
 };

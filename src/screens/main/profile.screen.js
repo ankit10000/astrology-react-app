@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import Constants from 'expo-constants';
-import i18n from '../../i18n';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
@@ -19,6 +18,7 @@ import { useGlobals } from '../../contexts/global';
 import useRate from '../../hooks/use-rate';
 import useShare from '../../hooks/use-share';
 import { useIsDark } from '../../hooks/use-theme';
+import i18n from '../../i18n';
 import { Backgrounds } from '../../svgs';
 import { DateUtils } from '../../utils';
 import PlatformUtils from '../../utils/platform';
@@ -59,7 +59,11 @@ function ProfileScreen({ navigation }) {
     <BlurView
       style={[
         StyleSheet.absoluteFill,
-        { backgroundColor: isDark ? 'rgba(15, 15, 15, 0.92)' : 'rgba(255, 255, 255, 0.93)' },
+        {
+          backgroundColor: isDark
+            ? 'rgba(15, 15, 15, 0.92)'
+            : 'rgba(255, 255, 255, 0.93)',
+        },
       ]}
       tint={isDark ? 'dark' : 'light'}
       intensity={isAndroid ? 150 : 100}
@@ -70,7 +74,9 @@ function ProfileScreen({ navigation }) {
         <Avatar.Text label={name.substring(0, 1)} />
         <View style={{ marginLeft: 25 }}>
           <Text variant="titleLarge">{i18n.t(sign)}</Text>
-          <Text variant="titleLarge">{DateUtils.toEuropean(new Date(birthDate))}</Text>
+          <Text variant="titleLarge">
+            {DateUtils.toEuropean(new Date(birthDate))}
+          </Text>
         </View>
       </View>
       <Divider style={{ marginTop: 25 }} />

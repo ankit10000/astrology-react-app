@@ -11,7 +11,12 @@ import { Animated, Easing } from 'react-native';
  * @returns {*}
  * @constructor
  */
-function FadeToTop({ children, fadeToTop = false, initialHeight = 300, finalHeight = 80 }) {
+function FadeToTop({
+  children,
+  fadeToTop = false,
+  initialHeight = 300,
+  finalHeight = 80,
+}) {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
