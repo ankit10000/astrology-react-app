@@ -59,24 +59,23 @@ function ChatScreen({ navigation }) {
         relationship: session.relationship,
         number: session.number,
       };
-      const { response } = await api.chat.sendMessage(
-        inputText.trim(),
-        context,
-        'en'
-      );
+      const result = await api.chat.sendMessage(inputText.trim(), context);
       const aiMsg = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: response,
+        content: result.response,
       };
       setMessages((prev) => [...prev, aiMsg]);
-    } catch {
+    } catch (err) {
       setMessages((prev) => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: 'Something is wrong',
+          content:
+            err.message?.includes('busy')
+              ? 'The stars are busy right now. Please try again in a moment.'
+              : 'Something went wrong. Please try again.',
         },
       ]);
     } finally {

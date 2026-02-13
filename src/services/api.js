@@ -2,7 +2,7 @@ import { SESSION_KEY } from '../constants/session';
 import Storer from '../utils/storer';
 
 const API_BASE_URL = __DEV__
-  ? 'https://astro-backend-tibu.onrender.com/api'
+  ? 'http://192.168.1.2:3000/api'
   : 'https://astro-backend-tibu.onrender.com/api';
 
 const request = async (method, path, body = null) => {

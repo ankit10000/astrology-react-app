@@ -76,22 +76,43 @@ function DailyScreen({ navigation }) {
   React.useEffect(() => {
     if (!session?.sign) return;
     let cancelled = false;
-    setLoading(true);
-    setError(null);
-    api.horoscope
-      .getDaily(session.sign, 'en')
-      .then((result) => {
+    const CACHE_KEY = `daily_horoscope_${session.sign}`;
+    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+    const fetchDaily = async () => {
+      setLoading(true);
+      setError(null);
+
+      // Check local cache first
+      try {
+        const cached = await Storer.get(CACHE_KEY);
+        if (cached && Date.now() - cached.timestamp < TWENTY_FOUR_HOURS) {
+          if (!cancelled) {
+            setData(cached.data);
+            setLoading(false);
+          }
+          return;
+        }
+      } catch {}
+
+      // No valid cache, fetch from API
+      try {
+        const result = await api.horoscope.getDaily(session.sign, 'en');
         if (!cancelled) {
           setData(result);
           setLoading(false);
+          // Save to local cache with timestamp
+          Storer.set(CACHE_KEY, { data: result, timestamp: Date.now() });
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         if (!cancelled) {
           setError(err.message);
           setLoading(false);
         }
-      });
+      }
+    };
+
+    fetchDaily();
     return () => {
       cancelled = true;
     };

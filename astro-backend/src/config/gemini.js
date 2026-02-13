@@ -2,8 +2,8 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Fallback chain: best available models, ordered by capability
-const MODELS = ['gemini-2.5-flash', 'gemma-3-27b-it', 'gemini-3-flash-preview'];
+// Fallback chain: gemma-3 models work in all regions, gemini models are geo-restricted
+const MODELS = ['gemma-3-27b-it', 'gemma-3-12b-it', 'gemini-2.5-flash'];
 
 const getModel = (modelName) => genAI.getGenerativeModel({ model: modelName });
 
@@ -22,8 +22,15 @@ const generateWithRetry = async (prompt, maxRetries = 2) => {
       } catch (err) {
         const is429 =
           err.message?.includes('429') || err.message?.includes('quota');
+        const isUnsupported =
+          err.message?.includes('not supported') ||
+          err.message?.includes('not found') ||
+          err.message?.includes('not available');
+        if (isUnsupported) {
+          console.log(`Model ${modelName} not available, trying next...`);
+          break;
+        }
         if (is429 && attempt < maxRetries) {
-          // Wait before retrying same model
           const delay = (attempt + 1) * 5000;
           console.log(
             `Rate limited on ${modelName}, retrying in ${delay / 1000}s...`
@@ -32,7 +39,6 @@ const generateWithRetry = async (prompt, maxRetries = 2) => {
           continue;
         }
         if (is429) {
-          // Move to next model
           console.log(`Quota exhausted for ${modelName}, trying next model...`);
           break;
         }

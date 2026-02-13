@@ -18,6 +18,7 @@ import { Sign } from '../../components/zodiac';
 import HoroscopeSigns from '../../constants/zodiac-signs';
 import { useGlobals } from '../../contexts/global';
 import api from '../../services/api';
+import Storer from '../../utils/storer';
 
 const Bars = ({ name, icon, end }) => {
   const { colors } = useTheme();
@@ -37,21 +38,47 @@ const Bars = ({ name, icon, end }) => {
 const MatchContent = ({ sign1, sign2 }) => {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    api.horoscope
-      .getCompatibility(sign1, sign2, 'en')
-      .then((result) => {
+    const [sorted1, sorted2] = [sign1, sign2].sort();
+    const CACHE_KEY = `compatibility_${sorted1}_${sorted2}`;
+    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+    const fetchCompat = async () => {
+      setLoading(true);
+      setError(null);
+
+      // Check local cache first
+      try {
+        const cached = await Storer.get(CACHE_KEY);
+        if (cached && Date.now() - cached.timestamp < TWENTY_FOUR_HOURS) {
+          if (!cancelled) {
+            setData(cached.data);
+            setLoading(false);
+          }
+          return;
+        }
+      } catch {}
+
+      // No valid cache, fetch from API
+      try {
+        const result = await api.horoscope.getCompatibility(sign1, sign2, 'en');
         if (!cancelled) {
           setData(result);
           setLoading(false);
+          Storer.set(CACHE_KEY, { data: result, timestamp: Date.now() });
         }
-      })
-      .catch(() => {
-        if (!cancelled) setLoading(false);
-      });
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || 'Failed to load compatibility');
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchCompat();
     return () => {
       cancelled = true;
     };
@@ -61,7 +88,7 @@ const MatchContent = ({ sign1, sign2 }) => {
     { name: 'Intimate', icon: 'account-multiple-plus-outline' },
     { name: 'Mindset', icon: 'thought-bubble' },
     { name: 'Feelings', icon: 'heart' },
-    { name: 'Priorities', icon: 'priority-high' },
+    { name: 'Priorities', icon: 'flag' },
     { name: 'Interests', icon: 'sticker-emoji' },
     { name: 'Sport', icon: 'run' },
   ];
@@ -75,7 +102,13 @@ const MatchContent = ({ sign1, sign2 }) => {
     );
   }
 
-  if (!data) return null;
+  if (error || !data) {
+    return (
+      <View style={{ padding: 40, alignItems: 'center' }}>
+        <Text style={{ marginBottom: 10 }}>{error || 'Something went wrong'}</Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -126,7 +159,7 @@ function CompatibilityScreen({ navigation }) {
   const [selectedSigns, setSelectedSigns] = React.useState([]);
   const [compDetailsShow, setCompDetailsShow] = React.useState(false);
   const handleSignPress = (sign) => {
-    setSelectedSigns((selectedSigns) => [...selectedSigns, sign]);
+    setSelectedSigns((prev) => (prev.length >= 2 ? prev : [...prev, sign]));
   };
   const handleSignTopPress = () =>
     setSelectedSigns([]) || setCompDetailsShow(false);
