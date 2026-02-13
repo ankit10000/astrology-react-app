@@ -18,26 +18,18 @@ import { useGlobals } from '../../contexts/global';
 import useRate from '../../hooks/use-rate';
 import useShare from '../../hooks/use-share';
 import { useIsDark } from '../../hooks/use-theme';
-import i18n from '../../i18n';
 import { Backgrounds } from '../../svgs';
 import { DateUtils } from '../../utils';
 import PlatformUtils from '../../utils/platform';
 import Storer from '../../utils/storer';
 
-/**
- * @param navigation
- * @returns {*}
- * @constructor
- */
 function ProfileScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { name, sign, birthDate, number, relationship, sex } = session;
   const { colors } = useTheme();
   const { setRate } = useRate();
   const { setStartShare } = useShare(
-    i18n.t(
-      'Try Astrale, the most precise horoscopes app in this existential plain'
-    ),
+    'Try Rashyn, the most precise horoscopes app in this existential plane',
     'https://play.google.com/store/apps/details?id=josep.astrale'
   );
   const isDark = useIsDark();
@@ -73,9 +65,9 @@ function ProfileScreen({ navigation }) {
       <View style={styles.headerContainer}>
         <Avatar.Text label={name.substring(0, 1)} />
         <View style={{ marginLeft: 25 }}>
-          <Text variant="titleLarge">{i18n.t(sign)}</Text>
+          <Text variant="titleLarge">{sign}</Text>
           <Text variant="titleLarge">
-            {DateUtils.toEuropean(new Date(birthDate))}
+            {DateUtils.toReadable(new Date(birthDate))}
           </Text>
         </View>
       </View>
@@ -87,7 +79,7 @@ function ProfileScreen({ navigation }) {
             color={colors.text}
             size={18}
           />
-          <Text style={{ marginLeft: 10 }}>{i18n.t(sex)} </Text>
+          <Text style={{ marginLeft: 10 }}>{sex} </Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
@@ -95,7 +87,7 @@ function ProfileScreen({ navigation }) {
             color={colors.text}
             size={18}
           />
-          <Text style={{ marginLeft: 10 }}>{i18n.t(relationship)} </Text>
+          <Text style={{ marginLeft: 10 }}>{relationship} </Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons name="dice-6" color={colors.text} size={18} />
@@ -105,13 +97,22 @@ function ProfileScreen({ navigation }) {
       <Divider style={{ marginTop: 15 }} />
       <View style={styles.buttonsContainer}>
         <Button
+          onPress={() => navigation.navigate('EditProfile')}
+          icon="account-edit"
+          style={{ marginTop: 10 }}
+          labelStyle={styles.buttonsLabel}
+          contentStyle={{ justifyContent: 'flex-start' }}
+        >
+          Edit Profile
+        </Button>
+        <Button
           onPress={_handleSharePress}
           icon="account-multiple"
           style={{ marginTop: 10 }}
           labelStyle={styles.buttonsLabel}
           contentStyle={{ justifyContent: 'flex-start' }}
         >
-          {i18n.t('Share with your friends')}
+          Share with your friends
         </Button>
         <Button
           onPress={_handleRatePress}
@@ -120,7 +121,7 @@ function ProfileScreen({ navigation }) {
           labelStyle={styles.buttonsLabel}
           contentStyle={{ justifyContent: 'flex-start' }}
         >
-          {i18n.t('Rate the app')}
+          Rate the app
         </Button>
         <Button
           onPress={_handleLogOut}
@@ -129,7 +130,7 @@ function ProfileScreen({ navigation }) {
           labelStyle={styles.buttonsLabel}
           contentStyle={{ justifyContent: 'flex-start' }}
         >
-          {i18n.t('Log out')}
+          Log out
         </Button>
       </View>
       <Divider style={{ marginTop: 10 }} />
@@ -141,7 +142,7 @@ function ProfileScreen({ navigation }) {
             labelStyle={styles.optionsLabel}
             textColor={colors.text}
           >
-            {i18n.t('Dark theme')}
+            Dark theme
           </Button>
           <Switch onValueChange={_handleDarkThemeChange} value={isDark} />
         </View>

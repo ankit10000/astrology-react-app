@@ -6,15 +6,9 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import CustomInput from '../../components/paper/custom-input';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import { Backgrounds } from '../../svgs';
 import Aquarius from '../../svgs/Aquarius';
 
-/**
- * @param navigation
- * @returns {*}
- * @constructor
- */
 function NameScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const [name, setName] = React.useState(session.name || '');
@@ -42,18 +36,17 @@ function NameScreen({ navigation }) {
       <View style={{ flex: 0.5 }} />
       <View style={styles.textContainer}>
         <Text variant="headlineMedium" style={styles.textHeadline}>
-          {i18n.t("What's your name?")}
+          {"What's your name?"}
         </Text>
         <Text style={styles.textText}>
-          {i18n.t(
-            'In order to give you accurate and personal information we need to know some info'
-          )}
+          In order to give you accurate and personal information we need to know
+          some info about you.
         </Text>
       </View>
       <View style={styles.inputContainer}>
         <CustomInput
           value={name}
-          placeholder={i18n.t('Write here')}
+          placeholder="Write here"
           onChangeText={(text) => setName(text)}
           style={{ fontSize: 12 }}
           maxLength={20}
@@ -65,7 +58,7 @@ function NameScreen({ navigation }) {
           disabled={buttonDisabled}
           onPress={_handleContinue}
         >
-          {i18n.t('Continue')}
+          Continue
         </Button>
       </View>
     </DefaultView>

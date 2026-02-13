@@ -12,7 +12,6 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import api from '../../services/api';
 import { Backgrounds } from '../../svgs';
 import Leo from '../../svgs/zodiac/Leo';
@@ -50,7 +49,7 @@ function LoginScreen({ navigation }) {
       await Storer.set(SESSION_KEY, { ...session, ...sessionData });
       dispatch({ type: 'setSession', fields: sessionData });
     } catch (err) {
-      setError(err.message || i18n.t('Something is wrong'));
+      setError(err.message || 'Something is wrong');
     } finally {
       setLoading(false);
     }
@@ -70,16 +69,16 @@ function LoginScreen({ navigation }) {
       <View style={{ flex: 0.4 }} />
       <View style={styles.textContainer}>
         <Text variant="headlineMedium" style={styles.textHeadline}>
-          {i18n.t('Welcome Back')}
+          Welcome Back
         </Text>
         <Text style={styles.textSubtitle}>
-          {i18n.t('Sign in to continue your cosmic journey')}
+          Sign in to continue your cosmic journey
         </Text>
       </View>
       <View style={styles.formContainer}>
         <TextInput
           mode="outlined"
-          label={i18n.t('Email')}
+          label="Email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -89,7 +88,7 @@ function LoginScreen({ navigation }) {
         />
         <TextInput
           mode="outlined"
-          label={i18n.t('Password')}
+          label="Password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
@@ -114,19 +113,19 @@ function LoginScreen({ navigation }) {
           onPress={_handleLogin}
           style={styles.button}
         >
-          {i18n.t('Sign In')}
+          Sign In
         </Button>
       </View>
       <View style={styles.footerContainer}>
         <Text style={{ color: colors.text }}>
-          {i18n.t("Don't have an account?")}{' '}
+          {"Don't have an account?"}{' '}
         </Text>
         <Button
           mode="text"
           compact
           onPress={() => navigation.navigate('Signup')}
         >
-          {i18n.t('Sign Up')}
+          Sign Up
         </Button>
       </View>
     </DefaultView>

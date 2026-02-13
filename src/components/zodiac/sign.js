@@ -3,7 +3,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 
-import i18n from '../../i18n';
 import { Zodiac } from '../../svgs';
 import PlatformUtils from '../../utils/platform';
 
@@ -22,20 +21,6 @@ const signs = {
   Virgo: Zodiac.Virgo,
 };
 
-/**
- * @param sign {string}
- * @param title {string}
- * @param showTitle {boolean}
- * @param subtitle {string}
- * @param onPress {function}
- * @param style {object}
- * @param signHeight {string|number}
- * @param signWidth {string|number}
- * @param styleTitle {object}
- * @param styleSubtitle {object}
- * @returns {*}
- * @constructor
- */
 function Sign({
   sign,
   title,
@@ -76,7 +61,7 @@ function Sign({
         </View>
         {showTitle && (
           <Text variant="titleMedium" style={styleTitle}>
-            {title ?? i18n.t(sign)}
+            {title ?? sign}
           </Text>
         )}
         {subtitle && (

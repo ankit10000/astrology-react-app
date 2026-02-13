@@ -1,7 +1,7 @@
 {
   "name": "astro-backend",
   "version": "1.0.0",
-  "description": "Backend for Astrale astrology app",
+  "description": "Backend for Rashyn astrology app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

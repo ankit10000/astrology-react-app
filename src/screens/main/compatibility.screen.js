@@ -17,25 +17,15 @@ import TextBold from '../../components/paper/text-bold';
 import { Sign } from '../../components/zodiac';
 import HoroscopeSigns from '../../constants/zodiac-signs';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import api from '../../services/api';
 
-/**
- * Progress bars from match
- * @param start {number|string}
- * @param name {string}
- * @param icon {string}
- * @param end
- * @returns {*}
- * @constructor
- */
 const Bars = ({ name, icon, end }) => {
   const { colors } = useTheme();
   return (
     <>
       <View style={styles.mathProgressText}>
         <Button textColor={colors.text} icon={icon}>
-          {i18n.t(name)}
+          {name}
         </Button>
         <Text>{end}%</Text>
       </View>
@@ -44,13 +34,7 @@ const Bars = ({ name, icon, end }) => {
   );
 };
 
-/**
- * Content when both selected
- * @returns {*}
- * @constructor
- */
 const MatchContent = ({ sign1, sign2 }) => {
-  const [{ session }] = useGlobals();
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
@@ -58,7 +42,7 @@ const MatchContent = ({ sign1, sign2 }) => {
     let cancelled = false;
     setLoading(true);
     api.horoscope
-      .getCompatibility(sign1, sign2, session.language)
+      .getCompatibility(sign1, sign2, 'en')
       .then((result) => {
         if (!cancelled) {
           setData(result);
@@ -71,7 +55,7 @@ const MatchContent = ({ sign1, sign2 }) => {
     return () => {
       cancelled = true;
     };
-  }, [sign1, sign2, session.language]);
+  }, [sign1, sign2]);
 
   const matches_data = [
     { name: 'Intimate', icon: 'account-multiple-plus-outline' },
@@ -86,7 +70,7 @@ const MatchContent = ({ sign1, sign2 }) => {
     return (
       <View style={{ padding: 40, alignItems: 'center' }}>
         <ProgressBar indeterminate style={{ width: 200, borderRadius: 5 }} />
-        <Text style={{ marginTop: 10 }}>{i18n.t('Loading')}...</Text>
+        <Text style={{ marginTop: 10 }}>Loading...</Text>
       </View>
     );
   }
@@ -98,11 +82,11 @@ const MatchContent = ({ sign1, sign2 }) => {
       <View style={styles.surfaceContainer}>
         <ShowFromTop>
           <TextBold style={{ marginBottom: 10 }}>
-            {i18n.t(sign1)} & {i18n.t(sign2)}
+            {sign1} & {sign2}
           </TextBold>
           <Text variant="bodyMedium">{data.resume}</Text>
           <TextBold style={{ marginTop: 20, marginBottom: 10 }}>
-            {i18n.t('Relationship')}
+            Relationship
           </TextBold>
           <Text variant="bodyMedium">{data.relationship}</Text>
           <View style={{ marginVertical: 20 }}>
@@ -120,12 +104,6 @@ const MatchContent = ({ sign1, sign2 }) => {
   );
 };
 
-/**
- * Each sign on body
- * @param onPress {func}
- * @returns {*}
- * @constructor
- */
 const SignsContent = ({ onPress }) => (
   <View style={styles.signsContainer}>
     {HoroscopeSigns.map((sign) => (
@@ -142,11 +120,6 @@ const SignsContent = ({ onPress }) => (
   </View>
 );
 
-/**
- * @param navigation
- * @returns {*}
- * @constructor
- */
 function CompatibilityScreen({ navigation }) {
   const { colors } = useTheme();
   const [scRef, setScRef] = React.useState();
@@ -171,7 +144,7 @@ function CompatibilityScreen({ navigation }) {
       <View style={{ marginBottom: 10 }}>
         <MainNav />
         <View style={styles.headerContainer}>
-          <ShadowHeadline>{i18n.t('Compatibility')}</ShadowHeadline>
+          <ShadowHeadline>Compatibility</ShadowHeadline>
         </View>
       </View>
       <View style={styles.matchCirclesContainer}>
@@ -195,7 +168,7 @@ function CompatibilityScreen({ navigation }) {
             ]}
           >
             <Text style={{ textAlign: 'center', fontSize: 10 }}>
-              {i18n.t('Your sign')}
+              Your sign
             </Text>
           </View>
         )}
@@ -222,7 +195,7 @@ function CompatibilityScreen({ navigation }) {
             ]}
           >
             <Text style={{ textAlign: 'center', fontSize: 10 }}>
-              {i18n.t('Partner sign')}
+              Partner sign
             </Text>
           </View>
         )}

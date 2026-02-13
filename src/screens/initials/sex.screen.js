@@ -5,16 +5,10 @@ import { Button, Text, TouchableRipple } from 'react-native-paper';
 import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import Female from '../../svgs/Female';
 import Leo from '../../svgs/Leo';
 import Male from '../../svgs/Male';
 
-/**
- * @param navigation
- * @returns {*}
- * @constructor
- */
 function SexScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const [sex, setSex] = React.useState('');
@@ -34,13 +28,10 @@ function SexScreen({ navigation }) {
       <View style={{ flex: 1 }} />
       <View style={styles.textContainer}>
         <Text variant="headlineMedium" style={styles.textHeadline}>
-          {i18n.t('Your gender')}
+          Your gender
         </Text>
         <Text style={styles.textText}>
-          {i18n.t(
-            '{name}, to give you accurate and personal information we need to know some info',
-            { name: session.name }
-          )}
+          {`${session.name}, to give you accurate and personal information we need to know some info about you.`}
         </Text>
       </View>
       <View style={styles.sexContainer}>
@@ -50,7 +41,7 @@ function SexScreen({ navigation }) {
         >
           <View>
             <Male style={{ opacity: sex === 'Male' ? 1 : 0.5 }} />
-            <Text style={styles.sexText}>{i18n.t('Male')}</Text>
+            <Text style={styles.sexText}>Male</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple
@@ -59,7 +50,7 @@ function SexScreen({ navigation }) {
         >
           <View>
             <Female style={{ opacity: sex === 'Female' ? 1 : 0.5 }} />
-            <Text style={styles.sexText}>{i18n.t('Female')}</Text>
+            <Text style={styles.sexText}>Female</Text>
           </View>
         </TouchableRipple>
       </View>
@@ -69,7 +60,7 @@ function SexScreen({ navigation }) {
           disabled={buttonDisabled}
           onPress={_handleContinue}
         >
-          {i18n.t('Continue')}
+          Continue
         </Button>
       </View>
     </DefaultView>

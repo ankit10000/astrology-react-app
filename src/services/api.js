@@ -40,6 +40,7 @@ const api = {
   },
   user: {
     saveOnboarding: (data) => request('POST', '/user/onboarding', data),
+    updateProfile: (data) => request('PUT', '/user/profile', data),
   },
   horoscope: {
     getDaily: (sign, lang = 'en') =>

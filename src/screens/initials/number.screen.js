@@ -6,15 +6,9 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import CustomInput from '../../components/paper/custom-input';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import Aquarius from '../../svgs/Aquarius';
 import Dices from '../../svgs/Dices';
 
-/**
- * @param navigation
- * @returns {*}
- * @constructor
- */
 function NumberScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const [number, setNumber] = React.useState();
@@ -34,13 +28,10 @@ function NumberScreen({ navigation }) {
       <View style={{ flex: 1 }} />
       <View style={styles.textContainer}>
         <Text variant="headlineMedium" style={styles.textHeadline}>
-          {i18n.t('Your favorite number')}
+          Your favorite number
         </Text>
         <Text style={styles.textText}>
-          {i18n.t(
-            '{name}, to give you accurate and personal information we need to know some info',
-            { name: session.name }
-          )}
+          {`${session.name}, to give you accurate and personal information we need to know some info about you.`}
         </Text>
       </View>
       <View style={styles.logoContainer}>
@@ -50,7 +41,7 @@ function NumberScreen({ navigation }) {
         <CustomInput
           value={number}
           onChangeText={(text) => setNumber(text)}
-          placeholder={i18n.t('Type here')}
+          placeholder="Type here"
           keyboardType="number-pad"
           enablesReturnKeyAutomatically
         />
@@ -61,7 +52,7 @@ function NumberScreen({ navigation }) {
           disabled={buttonDisabled}
           onPress={_handleContinue}
         >
-          {i18n.t('Continue')}
+          Continue
         </Button>
       </View>
     </DefaultView>

@@ -1,4 +1,4 @@
-# Astrale - Horoscope of the Zodiac
+# Rashyn - Horoscope of the Zodiac
 
 <p align="center">
   <img src="https://i.imgur.com/1JDnz7u.png">
@@ -6,7 +6,7 @@
 
 ## 🌍 About the app
 
-Astrale is an astrology mobile application made with **React Native**. Uses **Expo** as a toolchain and **Paper** for styling and theming.
+Rashyn is an astrology mobile application made with **React Native**. Uses **Expo** as a toolchain and **Paper** for styling and theming.
 
 It also supports multiple languages thanks to **i18n**, by default comes with texts in both English and Spanish.
 

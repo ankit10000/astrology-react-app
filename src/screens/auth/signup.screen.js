@@ -12,7 +12,6 @@ import { DefaultView } from '../../components/containers';
 import SpaceSky from '../../components/decorations/space-sky';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import api from '../../services/api';
 import { Backgrounds } from '../../svgs';
 import Pisces from '../../svgs/zodiac/Pisces';
@@ -47,7 +46,7 @@ function SignupScreen({ navigation }) {
       dispatch({ type: 'setSession', fields: sessionData });
       // main.js will auto-switch to InitialStack since authToken is set but basicsDone is not
     } catch (err) {
-      setError(err.message || i18n.t('Something is wrong'));
+      setError(err.message || 'Something is wrong');
     } finally {
       setLoading(false);
     }
@@ -66,16 +65,16 @@ function SignupScreen({ navigation }) {
       <View style={{ flex: 0.3 }} />
       <View style={styles.textContainer}>
         <Text variant="headlineMedium" style={styles.textHeadline}>
-          {i18n.t('Create Account')}
+          Create Account
         </Text>
         <Text style={styles.textSubtitle}>
-          {i18n.t('Begin your astrological adventure')}
+          Begin your astrological adventure
         </Text>
       </View>
       <View style={styles.formContainer}>
         <TextInput
           mode="outlined"
-          label={i18n.t('Name')}
+          label="Name"
           value={name}
           onChangeText={setName}
           maxLength={20}
@@ -84,7 +83,7 @@ function SignupScreen({ navigation }) {
         />
         <TextInput
           mode="outlined"
-          label={i18n.t('Email')}
+          label="Email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -94,7 +93,7 @@ function SignupScreen({ navigation }) {
         />
         <TextInput
           mode="outlined"
-          label={i18n.t('Password')}
+          label="Password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
@@ -119,15 +118,15 @@ function SignupScreen({ navigation }) {
           onPress={_handleSignup}
           style={styles.button}
         >
-          {i18n.t('Sign Up')}
+          Sign Up
         </Button>
       </View>
       <View style={styles.footerContainer}>
         <Text style={{ color: colors.text }}>
-          {i18n.t('Already have an account?')}{' '}
+          {'Already have an account?'}{' '}
         </Text>
         <Button mode="text" compact onPress={() => navigation.goBack()}>
-          {i18n.t('Sign In')}
+          Sign In
         </Button>
       </View>
     </DefaultView>

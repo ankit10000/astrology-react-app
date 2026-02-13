@@ -18,6 +18,9 @@ web-report/
 src/credentials/admob.js
 src/credentials/google-services.json
 
+# Release keystore
+android/app/rashyn-release.keystore
+
 # ides
 .idea
 

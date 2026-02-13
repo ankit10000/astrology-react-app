@@ -8,10 +8,10 @@ import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 
 import { useGlobals } from '../contexts/global';
 import { useIsDark } from '../hooks/use-theme';
-import i18n from '../i18n';
 import ChatScreen from '../screens/main/chat.screen';
 import CompatibilityScreen from '../screens/main/compatibility.screen';
 import DailyScreen from '../screens/main/daily.screen';
+import EditProfileScreen from '../screens/main/edit-profile.screen';
 import ProfileScreen from '../screens/main/profile.screen';
 import ZodiacScreen from '../screens/main/zodiac.screen';
 
@@ -71,10 +71,10 @@ function BottomBarNavigation() {
             ),
             tabBarLabel: (props) => (
               <BarLabel {...props} colo>
-                {i18n.t(session.sign)}
+                {session.sign}
               </BarLabel>
             ),
-            title: i18n.t(session.sign),
+            title: session.sign,
           }}
         />
         <Tab.Screen
@@ -84,9 +84,9 @@ function BottomBarNavigation() {
             headerShown: false,
             tabBarIcon: (props) => <BarIcon {...props} name="account-heart" />,
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t('Compatibility2')}</BarLabel>
+              <BarLabel {...props}>Compatibility</BarLabel>
             ),
-            title: i18n.t('Compatibility2'),
+            title: 'Compatibility',
           }}
         />
         <Tab.Screen
@@ -98,9 +98,9 @@ function BottomBarNavigation() {
               <BarIcon {...props} name="chat-processing" />
             ),
             tabBarLabel: (props) => (
-              <BarLabel {...props}>{i18n.t('Ask AI')}</BarLabel>
+              <BarLabel {...props}>Ask AI</BarLabel>
             ),
-            title: i18n.t('Ask AI'),
+            title: 'Ask AI',
           }}
         />
       </Tab.Navigator>
@@ -123,6 +123,19 @@ function MainStackNavigation() {
         <Sta.Screen
           name="Profile"
           component={ProfileScreen}
+          options={{
+            presentation: 'transparentModal',
+            contentStyle: {
+              backgroundColor: 'transparent',
+              marginTop: 50,
+              borderTopLeftRadius: 30,
+              borderTopRightRadius: 30,
+            },
+          }}
+        />
+        <Sta.Screen
+          name="EditProfile"
+          component={EditProfileScreen}
           options={{
             presentation: 'transparentModal',
             contentStyle: {

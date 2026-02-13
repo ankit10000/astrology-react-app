@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Astrale",
-    "slug": "astrale",
+    "name": "Rashyn",
+    "slug": "rashyn",
     "version": "1.0.0",
-    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, well-being and good fortune for today with Astrale app.",
+    "description": "Discover what the future holds for you. Get an insight on what to expect for love, work, well-being and good fortune for today with Rashyn app.",
     "platforms": [
       "ios",
       "android"
@@ -19,16 +19,17 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "scheme": "astrale",
+    "scheme": "rashyn",
     "ios": {
-      "bundleIdentifier": "x.astrale",
+      "bundleIdentifier": "com.rashyn.app",
       "buildNumber": "1.0.0",
       "supportsTablet": false,
       "icon": "./assets/images/icon.png"
     },
     "android": {
-      "package": "x.astrale",
-      "versionCode": 4
+      "package": "com.rashyn.app",
+      "versionCode": 4,
+      "usesCleartextTraffic": true
     },
     "androidStatusBar": {
       "hidden": false,
@@ -38,8 +39,7 @@
     },
     "plugins": [
       "@react-native-community/datetimepicker",
-      "expo-asset",
-      "expo-localization"
+      "expo-asset"
     ]
   }
 }

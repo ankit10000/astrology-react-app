@@ -1,4 +1,4 @@
-package x.astrale
+package com.rashyn.app
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

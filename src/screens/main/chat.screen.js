@@ -19,7 +19,6 @@ import SpaceSky from '../../components/decorations/space-sky';
 import MainNav from '../../components/navs/main-nav';
 import ShadowHeadline from '../../components/paper/shadow-headline';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import api from '../../services/api';
 
 function ChatScreen({ navigation }) {
@@ -35,10 +34,7 @@ function ChatScreen({ navigation }) {
       {
         id: '0',
         role: 'assistant',
-        content: i18n.t('chat_welcome', {
-          name: session.name,
-          sign: i18n.t(session.sign),
-        }),
+        content: `Hello ${session.name}! I am your personal astrology assistant. As a ${session.sign}, I can help you understand your daily horoscope, compatibility, and more. What would you like to know?`,
       },
     ]);
   }, [session.name, session.sign]);
@@ -66,7 +62,7 @@ function ChatScreen({ navigation }) {
       const { response } = await api.chat.sendMessage(
         inputText.trim(),
         context,
-        session.language
+        'en'
       );
       const aiMsg = {
         id: (Date.now() + 1).toString(),
@@ -80,7 +76,7 @@ function ChatScreen({ navigation }) {
         {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: i18n.t('Something is wrong'),
+          content: 'Something is wrong',
         },
       ]);
     } finally {
@@ -119,7 +115,7 @@ function ChatScreen({ navigation }) {
         <View style={styles.header}>
           <MainNav />
           <ShadowHeadline style={styles.headline}>
-            {i18n.t('Ask AI')}
+            Ask AI
           </ShadowHeadline>
         </View>
         <KeyboardAvoidingView
@@ -143,7 +139,7 @@ function ChatScreen({ navigation }) {
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="small" />
               <Text style={{ marginLeft: 8, opacity: 0.6 }}>
-                {i18n.t('Loading')}...
+                Loading...
               </Text>
             </View>
           )}
@@ -155,7 +151,7 @@ function ChatScreen({ navigation }) {
           >
             <TextInput
               mode="outlined"
-              placeholder={i18n.t('chat_placeholder')}
+              placeholder="Ask about your horoscope..."
               value={inputText}
               onChangeText={setInputText}
               style={styles.input}

@@ -1,6 +1,6 @@
 const { generateWithRetry } = require('../config/gemini');
 
-const SYSTEM_CONTEXT = `You are a wise and mystical astrology assistant for the Astrale app.
+const SYSTEM_CONTEXT = `You are a wise and mystical astrology assistant for the Rashyn app.
 You provide personalized astrological guidance based on the user's zodiac sign and birth details.
 Keep responses warm, insightful, and grounded in astrological tradition.
 Never provide medical, legal, or financial advice.
@@ -15,7 +15,7 @@ async function generateChatResponse(userMessage, userContext, lang = 'en') {
 User's astrological profile:
 - Name: ${userContext.name}
 - Zodiac Sign: ${userContext.sign}
-- Birth Date: ${userContext.birthDate ? new Date(userContext.birthDate).toLocaleDateString() : 'Unknown'}
+- Birth Date: ${userContext.birthDate ? new Date(userContext.birthDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Unknown'}
 - Sex: ${userContext.sex || 'Unknown'}
 - Relationship Status: ${userContext.relationship || 'Unknown'}
 - Lucky Number: ${userContext.number || 'Unknown'}
@@ -48,7 +48,7 @@ ${langInstruction}
 
 Return a JSON object with this exact structure:
 {
-  "focus": "<one word focus area like: Love, Career, Health, Fitness, Study, Social, Creativity>",
+  "focus": "<MUST be exactly one of: Love, Career, Health, Fitness, Study, Social, Creativity>",
   "percents": { "love": <0-100>, "work": <0-100>, "health": <0-100> },
   "text": "<150-250 word personalized horoscope>",
   "compatibility": ["<sign1>", "<sign2>", "<sign3>"],

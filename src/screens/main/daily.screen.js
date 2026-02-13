@@ -14,15 +14,9 @@ import { Sign } from '../../components/zodiac';
 import months from '../../constants/months';
 import { SESSION_KEY } from '../../constants/session';
 import { useGlobals } from '../../contexts/global';
-import i18n from '../../i18n';
 import api from '../../services/api';
 import Storer from '../../utils/storer';
 
-/**
- * @param number {number}
- * @returns {*}
- * @constructor
- */
 const LuckyNumber = ({ number }) => {
   const { colors } = useTheme();
   return (
@@ -44,13 +38,6 @@ const LuckyNumberStyles = StyleSheet.create({
   },
 });
 
-/**
- * @param text {text}
- * @param percent {number}
- * @param style {object}
- * @returns {*}
- * @constructor
- */
 const ProgressItem = ({ text, percent, style }) => {
   const { colors } = useTheme();
   return (
@@ -72,11 +59,6 @@ const ProgressItemStyles = StyleSheet.create({
   },
 });
 
-/**
- * @param navigation {object}
- * @returns {*}
- * @constructor
- */
 function DailyScreen({ navigation }) {
   const [{ session }, dispatch] = useGlobals();
   const { colors } = useTheme();
@@ -97,7 +79,7 @@ function DailyScreen({ navigation }) {
     setLoading(true);
     setError(null);
     api.horoscope
-      .getDaily(session.sign, session.language)
+      .getDaily(session.sign, 'en')
       .then((result) => {
         if (!cancelled) {
           setData(result);
@@ -113,7 +95,7 @@ function DailyScreen({ navigation }) {
     return () => {
       cancelled = true;
     };
-  }, [session?.sign, session?.language]);
+  }, [session?.sign]);
 
   const Header = (
     <View>
@@ -136,14 +118,10 @@ function DailyScreen({ navigation }) {
           signHeight={70}
         />
         <ShadowHeadline style={styles.headerHeadline}>
-          {i18n.t(session.sign)}
+          {session.sign}
         </ShadowHeadline>
         <Text variant="titleMedium">
-          {i18n.t('date_daily', {
-            day: d.getDate(),
-            month: months[session.language][d.getMonth()],
-            year: d.getFullYear(),
-          })}
+          {`Day ${d.getDate()} of ${months[d.getMonth()]}, ${d.getFullYear()}`}
         </Text>
       </View>
       <Divider />
@@ -158,7 +136,7 @@ function DailyScreen({ navigation }) {
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
           <ProgressBar indeterminate style={{ width: 200, borderRadius: 5 }} />
-          <Text style={{ marginTop: 15 }}>{i18n.t('Loading')}...</Text>
+          <Text style={{ marginTop: 15 }}>Loading...</Text>
         </SafeAreaView>
       </>
     );
@@ -171,7 +149,7 @@ function DailyScreen({ navigation }) {
         <SafeAreaView
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <Text>{i18n.t('Something is wrong')}</Text>
+          <Text>Something is wrong</Text>
         </SafeAreaView>
       </>
     );
@@ -195,12 +173,12 @@ function DailyScreen({ navigation }) {
               ]}
             >
               <TextBold style={styles.textTitles}>
-                {i18n.t('Focus of the day')}:
+                Focus of the day:
               </TextBold>
               <TextBold
                 style={{ fontSize: 16, marginLeft: 5, color: colors.primary }}
               >
-                {i18n.t(data.focus)}
+                {data.focus}
               </TextBold>
             </View>
             <View
@@ -215,23 +193,23 @@ function DailyScreen({ navigation }) {
               ]}
             >
               <ProgressItem
-                text={i18n.t('Love')}
+                text="Love"
                 percent={data.percents.love}
               />
               <ProgressItem
-                text={i18n.t('Career')}
+                text="Career"
                 percent={data.percents.work}
                 style={{ marginHorizontal: 5 }}
               />
               <ProgressItem
-                text={i18n.t('Health')}
+                text="Health"
                 percent={data.percents.health}
               />
             </View>
             <View style={[styles.defaultContainer]}>
               <View style={styles.horoscopeTodayContainer}>
                 <TextBold style={styles.textTitles}>
-                  {i18n.t('Your horoscope for today')}:
+                  Your horoscope for today:
                 </TextBold>
                 <View style={styles.iconsHoroscopeToday}>
                   <MaterialCommunityIcons
@@ -258,7 +236,7 @@ function DailyScreen({ navigation }) {
             </View>
             <View style={styles.defaultContainer}>
               <TextBold style={styles.textTitles}>
-                {i18n.t('Today you love')}
+                Today you love
               </TextBold>
             </View>
             <View
@@ -298,7 +276,7 @@ function DailyScreen({ navigation }) {
             <Divider style={{ marginTop: 20 }} />
             <View style={styles.defaultContainer}>
               <TextBold style={styles.textTitles}>
-                {i18n.t('Lucky numbers')}
+                Lucky numbers
               </TextBold>
             </View>
             <View
