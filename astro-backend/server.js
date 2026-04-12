@@ -29,7 +29,11 @@ app.get('/api/health', (req, res) => {
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Astro backend running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Astro backend running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
