@@ -3,7 +3,7 @@ import Storer from '../utils/storer';
 
 const API_BASE_URL = __DEV__
   ? 'http://192.168.1.9:3000/api'
-  : 'https://astro-backend-tibu.onrender.com/api';
+  : 'https://astro-backend-three.vercel.app/api';
 
 const request = async (method, path, body = null) => {
   const session = await Storer.get(SESSION_KEY);
