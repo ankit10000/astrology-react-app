@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const horoscopeCacheSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['daily', 'compatibility'],
+    enum: ['daily', 'compatibility', 'birth-chart', 'panchang', 'remedies'],
     required: true,
   },
   sign: { type: String, required: true },

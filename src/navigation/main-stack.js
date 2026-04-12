@@ -8,11 +8,14 @@ import { ActivityIndicator, Portal, Text, useTheme } from 'react-native-paper';
 
 import { useGlobals } from '../contexts/global';
 import { useIsDark } from '../hooks/use-theme';
+import BirthChartScreen from '../screens/main/birth-chart.screen';
 import ChatScreen from '../screens/main/chat.screen';
 import CompatibilityScreen from '../screens/main/compatibility.screen';
 import DailyScreen from '../screens/main/daily.screen';
 import EditProfileScreen from '../screens/main/edit-profile.screen';
+import PanchangScreen from '../screens/main/panchang.screen';
 import ProfileScreen from '../screens/main/profile.screen';
+import RemediesScreen from '../screens/main/remedies.screen';
 import ZodiacScreen from '../screens/main/zodiac.screen';
 
 const BarIcon = ({ color, size, name }) => {
@@ -78,15 +81,51 @@ function BottomBarNavigation() {
           }}
         />
         <Tab.Screen
+          name="Panchang"
+          component={PanchangScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: (props) => <BarIcon {...props} name="calendar-star" />,
+            tabBarLabel: (props) => (
+              <BarLabel {...props}>Panchang</BarLabel>
+            ),
+            title: 'Panchang',
+          }}
+        />
+        <Tab.Screen
+          name="BirthChart"
+          component={BirthChartScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: (props) => <BarIcon {...props} name="chart-arc" />,
+            tabBarLabel: (props) => (
+              <BarLabel {...props}>Birth Chart</BarLabel>
+            ),
+            title: 'Birth Chart',
+          }}
+        />
+        <Tab.Screen
           name="Compatibility"
           component={CompatibilityScreen}
           options={{
             headerShown: false,
             tabBarIcon: (props) => <BarIcon {...props} name="account-heart" />,
             tabBarLabel: (props) => (
-              <BarLabel {...props}>Compatibility</BarLabel>
+              <BarLabel {...props}>Compat.</BarLabel>
             ),
             title: 'Compatibility',
+          }}
+        />
+        <Tab.Screen
+          name="Remedies"
+          component={RemediesScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: (props) => <BarIcon {...props} name="leaf" />,
+            tabBarLabel: (props) => (
+              <BarLabel {...props}>Remedies</BarLabel>
+            ),
+            title: 'Remedies',
           }}
         />
         <Tab.Screen

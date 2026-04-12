@@ -91,8 +91,116 @@ Return ONLY valid JSON, no markdown formatting.`;
   return JSON.parse(text.replace(/```json\n?|\n?```/g, '').trim());
 }
 
+async function generateBirthChart(sign, birthDate, lang = 'en') {
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const formattedDate = new Date(birthDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const prompt = `${SYSTEM_CONTEXT}
+
+Generate a Vedic astrology birth chart interpretation for someone born on ${formattedDate} with Sun sign ${sign}.
+
+${langInstruction}
+
+Return a JSON object with this exact structure:
+{
+  "ascendant": "<Lagna/Ascendant sign name and 40-60 word meaning>",
+  "moonSign": "<Moon sign name and 40-60 word emotional profile>",
+  "sunSign": "<Sun sign ${sign} and 40-60 word core identity>",
+  "nakshatra": "<Birth Nakshatra name and 40-60 word traits>",
+  "planetaryHighlights": [
+    { "planet": "<planet name>", "placement": "<sign or house>", "effect": "<30-40 word effect>" },
+    { "planet": "<planet name>", "placement": "<sign or house>", "effect": "<30-40 word effect>" },
+    { "planet": "<planet name>", "placement": "<sign or house>", "effect": "<30-40 word effect>" }
+  ],
+  "lifeTheme": "<100-120 word overall life theme and soul purpose>",
+  "strengths": ["<strength 1>", "<strength 2>", "<strength 3>"],
+  "challenges": ["<challenge 1>", "<challenge 2>"]
+}
+
+Return ONLY valid JSON, no markdown formatting.`;
+
+  const text = await generateWithRetry(prompt);
+  return JSON.parse(text.replace(/```json\n?|\n?```/g, '').trim());
+}
+
+async function generatePanchang(date, lang = 'en') {
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const prompt = `${SYSTEM_CONTEXT}
+
+Generate the Hindu Panchang (Vedic almanac) for ${formattedDate}.
+
+${langInstruction}
+
+Return a JSON object with this exact structure:
+{
+  "tithi": { "name": "<tithi name e.g. Ekadashi>", "description": "<30-40 word meaning>" },
+  "nakshatra": { "name": "<nakshatra name>", "deity": "<ruling deity>", "description": "<30-40 word traits>" },
+  "yoga": { "name": "<yoga name e.g. Shubha>", "description": "<30-40 word effect on the day>" },
+  "karana": { "name": "<karana name>", "description": "<20-30 word meaning>" },
+  "var": { "day": "<weekday in English>", "rulingPlanet": "<planet name>", "description": "<20-30 word day quality>" },
+  "rahuKaal": { "start": "<e.g. 09:00 AM>", "end": "<e.g. 10:30 AM>", "warning": "<20-30 word avoidance tip>" },
+  "auspicious": ["<activity 1>", "<activity 2>", "<activity 3>"],
+  "inauspicious": ["<activity 1>", "<activity 2>"],
+  "dayQuality": "<overall 50-60 word summary of the day's energy>"
+}
+
+Return ONLY valid JSON, no markdown formatting.`;
+
+  const text = await generateWithRetry(prompt);
+  return JSON.parse(text.replace(/```json\n?|\n?```/g, '').trim());
+}
+
+async function generateRemedies(sign, lang = 'en') {
+  const langInstruction =
+    lang === 'es' ? 'Respond in Spanish.' : 'Respond in English.';
+  const today = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  const prompt = `${SYSTEM_CONTEXT}
+
+Generate Vedic astrology remedies for a ${sign} for today (${today}).
+
+${langInstruction}
+
+Return a JSON object with this exact structure:
+{
+  "mantra": { "text": "<the mantra in Sanskrit>", "transliteration": "<romanized>", "meaning": "<English meaning>", "repetitions": <number like 108>, "benefit": "<30-40 word benefit>" },
+  "ritual": { "title": "<ritual name>", "steps": ["<step 1>", "<step 2>", "<step 3>"], "timing": "<best time to perform e.g. Sunrise>" },
+  "gemstone": { "name": "<gemstone>", "planet": "<ruling planet>", "howToWear": "<finger and metal>", "benefit": "<30-40 word benefit>" },
+  "donation": { "item": "<what to donate>", "day": "<best day>", "recipient": "<who to give to>", "benefit": "<20-30 word benefit>" },
+  "color": "<auspicious color for today>",
+  "direction": "<auspicious direction e.g. East>",
+  "affirmation": "<a powerful 15-20 word daily affirmation for this sign>"
+}
+
+Return ONLY valid JSON, no markdown formatting.`;
+
+  const text = await generateWithRetry(prompt);
+  return JSON.parse(text.replace(/```json\n?|\n?```/g, '').trim());
+}
+
 module.exports = {
   generateChatResponse,
   generateDailyHoroscope,
   generateCompatibility,
+  generateBirthChart,
+  generatePanchang,
+  generateRemedies,
 };

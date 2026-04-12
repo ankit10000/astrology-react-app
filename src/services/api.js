@@ -2,7 +2,7 @@ import { SESSION_KEY } from '../constants/session';
 import Storer from '../utils/storer';
 
 const API_BASE_URL = __DEV__
-  ? 'http://192.168.1.2:3000/api'
+  ? 'http://192.168.1.9:3000/api'
   : 'https://astro-backend-tibu.onrender.com/api';
 
 const request = async (method, path, body = null) => {
@@ -54,6 +54,14 @@ const api = {
   chat: {
     sendMessage: (message, context, lang = 'en') =>
       request('POST', '/chat', { message, context, lang }),
+  },
+  vedic: {
+    getBirthChart: (sign, birthDate, lang = 'en') =>
+      request('GET', `/vedic/birth-chart?sign=${sign}&birthDate=${birthDate}&lang=${lang}`),
+    getPanchang: (lang = 'en') =>
+      request('GET', `/vedic/panchang?lang=${lang}`),
+    getRemedies: (sign, lang = 'en') =>
+      request('GET', `/vedic/remedies?sign=${sign}&lang=${lang}`),
   },
 };
 
