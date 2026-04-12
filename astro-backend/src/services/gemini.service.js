@@ -1,4 +1,4 @@
-const { generateWithRetry } = require('../config/gemini');
+const { generateWithRetry } = require('../config/azure-openai');
 
 const SYSTEM_CONTEXT = `You are a wise and mystical astrology assistant for the Rashyn app.
 You provide personalized astrological guidance based on the user's zodiac sign and birth details.
