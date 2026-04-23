@@ -35,8 +35,8 @@ const api = {
   auth: {
     login: (email, password) =>
       request('POST', '/auth/login', { email, password }),
-    signup: (name, email, password, role = 'patient') =>
-      request('POST', '/auth/register', { name, email, password, role }),
+    signup: (name, email, password) =>
+      request('POST', '/auth/signup', { name, email, password }),
   },
   user: {
     saveOnboarding: (data) => request('POST', '/user/onboarding', data),
