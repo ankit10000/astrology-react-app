@@ -2,8 +2,8 @@ import { SESSION_KEY } from '../constants/session';
 import Storer from '../utils/storer';
 
 const API_BASE_URL = __DEV__
-  ? 'http://192.168.1.9:3000/api'
-  : 'https://astro-backend-three.vercel.app/api';
+  ? 'https://medico-api.vercel.app/api'
+  : 'https://medico-api.vercel.app/api';
 
 const request = async (method, path, body = null) => {
   const session = await Storer.get(SESSION_KEY);
@@ -35,8 +35,8 @@ const api = {
   auth: {
     login: (email, password) =>
       request('POST', '/auth/login', { email, password }),
-    signup: (name, email, password) =>
-      request('POST', '/auth/signup', { name, email, password }),
+    signup: (name, email, password, role = 'patient') =>
+      request('POST', '/auth/register', { name, email, password, role }),
   },
   user: {
     saveOnboarding: (data) => request('POST', '/user/onboarding', data),
