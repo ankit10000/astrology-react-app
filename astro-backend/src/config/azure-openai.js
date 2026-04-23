@@ -1,5 +1,6 @@
 const AZURE_ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT;
 const AZURE_KEY = process.env.AZURE_OPENAI_KEY;
+const AZURE_MODEL = process.env.AZURE_OPENAI_MODEL;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -13,6 +14,7 @@ const generateWithRetry = async (prompt, maxRetries = 2) => {
           'api-key': AZURE_KEY,
         },
         body: JSON.stringify({
+          model: AZURE_MODEL,
           messages: [{ role: 'user', content: prompt }],
           max_tokens: 1500,
           temperature: 0.7,
